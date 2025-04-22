@@ -1,13 +1,13 @@
-﻿using System;
-using System.Net;
-using System.Net.Http;
-using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
-using System.Threading.Tasks;
 using Clients;
 using IdentityModel;
 using IdentityModel.Client;
 using Newtonsoft.Json.Linq;
+using System;
+using System.Net.Http;
+using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
+using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace ConsoleEphemeralMtlsClient
 {
@@ -30,14 +30,23 @@ namespace ConsoleEphemeralMtlsClient
         {
             var client = new HttpClient(GetHandler(ClientCertificate));
 
-            var disco = await client.GetDiscoveryDocumentAsync(Constants.AuthorityMtls);
+            DiscoveryDocumentResponse disco = await client.GetDiscoveryDocumentAsync(Constants.AuthorityMtls);
             if (disco.IsError) throw new Exception(disco.Error);
 
+            //这个语法不支持了
+            /*
             var endpoint = disco
-                .TryGetValue(OidcConstants.Discovery.MtlsEndpointAliases)
-                .Value<string>(OidcConstants.Discovery.TokenEndpoint)
-                .ToString();
-            
+                       .TryGetValue(OidcConstants.Discovery.MtlsEndpointAliases)
+                       .Value<string>(OidcConstants.Discovery.TokenEndpoint)
+                       .ToString();
+            */
+
+            JsonElement t1 = disco.TryGetValue(OidcConstants.Discovery.MtlsEndpointAliases).Value;
+
+            JsonElement t2 = t1.TryGetValue(OidcConstants.Discovery.TokenEndpoint);
+
+            //
+            var endpoint = t2.ToString();
             var response = await client.RequestClientCredentialsTokenAsync(new ClientCredentialsTokenRequest
             {
                 Address = endpoint,

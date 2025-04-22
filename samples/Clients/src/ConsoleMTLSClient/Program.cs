@@ -1,4 +1,4 @@
-﻿using Clients;
+using Clients;
 using IdentityModel;
 using IdentityModel.Client;
 using Newtonsoft.Json.Linq;
@@ -6,6 +6,7 @@ using System;
 using System.Linq;
 using System.Net.Http;
 using System.Security.Cryptography.X509Certificates;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace ConsoleMTLSClient
@@ -30,11 +31,18 @@ namespace ConsoleMTLSClient
             var disco = await client.GetDiscoveryDocumentAsync("https://identityserver.local");
             if (disco.IsError) throw new Exception(disco.Error);
 
+            /*
             var endpoint = disco
                     .TryGetValue(OidcConstants.Discovery.MtlsEndpointAliases)
                     .Value<string>(OidcConstants.Discovery.TokenEndpoint)
                     .ToString();
-            
+            */
+
+            JsonElement t1 = disco.TryGetValue(OidcConstants.Discovery.MtlsEndpointAliases).Value;
+
+            JsonElement t2 = t1.TryGetValue(OidcConstants.Discovery.TokenEndpoint);
+
+            var endpoint = t2.ToString();
             var response = await client.RequestClientCredentialsTokenAsync(new ClientCredentialsTokenRequest
             {
                 Address = endpoint,
