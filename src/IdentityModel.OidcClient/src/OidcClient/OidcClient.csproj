@@ -1,0 +1,62 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <RootNamespace>IdentityModel.OidcClient</RootNamespace>
+        <AssemblyName>IdentityModel.OidcClient</AssemblyName>
+
+        <TargetFrameworks>netstandard2.0;net6.0</TargetFrameworks>
+        <LangVersion>latest</LangVersion>
+
+        <PackageId>IdentityModel.OidcClient</PackageId>
+        <PackageTags>OAuth2;OAuth 2.0;OpenID Connect;Security;Identity;IdentityServer</PackageTags>
+        <Description>RFC8252 compliant and certified OpenID Connect and OAuth 2.0 client library for native applications</Description>
+        <Authors>Dominick Baier;Brock Allen</Authors>
+        <PackageIcon>icon.jpg</PackageIcon>
+        <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+
+        <!-- Publish the repository URL in the built .nupkg (in the NuSpec <Repository> element) -->
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+
+        <!-- Embed source files that are not tracked by the source control manager in the PDB -->
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+
+        <!-- Recommended: Embed symbols containing Source Link in the main file (exe/dll) -->
+        <DebugType>embedded</DebugType>
+
+        <!-- Enable Trimming Warnings to allow consumers to publish as trimmed -->
+        <IsTrimmable Condition="'$(TargetFramework)' == 'net6.0'">true</IsTrimmable>
+
+        <ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">True</ContinuousIntegrationBuild>
+
+        <AssemblyOriginatorKeyFile>../../key.snk</AssemblyOriginatorKeyFile>
+        <SignAssembly>true</SignAssembly>
+        <PublicSign Condition="'$(OS)' != 'Windows_NT'">true</PublicSign>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="../../icon.jpg" Pack="true" Visible="false" PackagePath="" />
+        <None Include="README.md" Pack="true" PackagePath="" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="minver" Version="5.0.0" PrivateAssets="All" />
+        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
+
+
+
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
+
+    </ItemGroup>
+
+    <!--Conditional Package references -->
+    <ItemGroup Condition="'$(TargetFramework)' != 'net6.0'">
+        <PackageReference Include="System.Text.Json" Version="8.0.0" />
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\..\..\IdentityModel\src\IdentityModel.csproj" />
+    </ItemGroup>
+
+</Project>
