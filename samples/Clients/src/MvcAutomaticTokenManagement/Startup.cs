@@ -43,6 +43,7 @@ namespace MvcCode
 
                     options.Events.OnSigningOut = async e =>
                     {
+                        //TOOD:myi 
                         // automatically revoke refresh token at signout time
                         await e.HttpContext.RevokeUserRefreshTokenAsync();
                     };
@@ -76,9 +77,11 @@ namespace MvcCode
                     };
                 });
 
+            //TODO:myi
             // add automatic token management
             services.AddAccessTokenManagement();
 
+            //TODO:myi
             // add HTTP client to call protected API
             services.AddUserAccessTokenClient("client", client =>
             {
