@@ -69,6 +69,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityModel.AspNetCore", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OidcClient", "..\..\src\IdentityModel.OidcClient\src\OidcClient\OidcClient.csproj", "{13CBFB6A-4FF7-4524-93BD-53EF71890A39}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityModel.AspNetCore.AccessTokenValidation", "..\..\src\IdentityModel.AspNetCore.AccessTokenValidation\src\IdentityModel.AspNetCore.AccessTokenValidation.csproj", "{C86A9848-65B2-4BA6-88B7-BABF760E08F7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -187,6 +189,10 @@ Global
 		{13CBFB6A-4FF7-4524-93BD-53EF71890A39}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13CBFB6A-4FF7-4524-93BD-53EF71890A39}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{13CBFB6A-4FF7-4524-93BD-53EF71890A39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C86A9848-65B2-4BA6-88B7-BABF760E08F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C86A9848-65B2-4BA6-88B7-BABF760E08F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C86A9848-65B2-4BA6-88B7-BABF760E08F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C86A9848-65B2-4BA6-88B7-BABF760E08F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
